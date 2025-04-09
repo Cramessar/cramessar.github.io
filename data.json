@@ -20,5 +20,9 @@
   "Education": {
     "title": "Education",
     "description": "Coding Temple \u2013 Certificate in Software Engineering"
-  }
+  },
+  "Avatar": {
+  "title": "Christopher Ramessar",
+  "description": "Tech Leader | Full-Stack Developer | AI Explorer | Problem-Solver"
+}
 }
