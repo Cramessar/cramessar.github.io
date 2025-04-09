@@ -1,0 +1,20 @@
+// Filename: data.json
+{
+    "HTML": {
+      "title": "HTML",
+      "description": "The foundation of web structure. Used to build semantic, accessible markup for all projects."
+    },
+    "CSS": {
+      "title": "CSS",
+      "description": "Styling wizardry. From flexbox to grid, animations to dark mode themes, I’ve styled it all."
+    },
+    "JavaScript": {
+      "title": "JavaScript",
+      "description": "The dynamic soul of the web. DOM manipulation, API calls, event handling—you name it."
+    },
+    "React": {
+      "title": "React",
+      "description": "Component-based frontend power. I build reusable, scalable interfaces with React and hooks."
+    }
+  }
+  

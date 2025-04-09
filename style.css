@@ -1,65 +1,87 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
-    line-height: 1.6;
-    padding: 20px;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #61dafb;
-    font-weight: bold;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
-  main {
-    max-width: 800px;
-    margin: auto;
-  }
-  
-  section {
-    margin-bottom: 60px;
-  }
-  
-  .project {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  
-  .project a {
-    color: #ffa500;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 0.9em;
-    color: #888;
-  }
-  
+/* Filename: style.css */
+
+body {
+  margin: 0;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #61dafb;
+}
+
+.sphere-grid {
+  width: 100%;
+  height: 500px;
+}
+
+.node {
+  fill: #1e90ff;
+  stroke: #00ffff;
+  stroke-width: 3;
+  cursor: pointer;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.node:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #00ffff);
+}
+
+.path {
+  stroke: #555;
+  stroke-width: 2;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #222;
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #61dafb;
+  border-radius: 5px;
+  pointer-events: none;
+  display: none;
+  font-size: 0.9rem;
+  z-index: 10;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background-color: #222;
+  margin: 10% auto;
+  padding: 20px;
+  border: 2px solid #61dafb;
+  width: 80%;
+  max-width: 500px;
+  color: white;
+  border-radius: 10px;
+  position: relative;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
