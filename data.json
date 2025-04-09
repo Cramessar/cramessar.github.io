@@ -1,20 +1,24 @@
-// Filename: data.json
+// File: data.json
+
 {
-    "HTML": {
-      "title": "HTML",
-      "description": "The foundation of web structure. Used to build semantic, accessible markup for all projects."
-    },
-    "CSS": {
-      "title": "CSS",
-      "description": "Styling wizardry. From flexbox to grid, animations to dark mode themes, I’ve styled it all."
-    },
-    "JavaScript": {
-      "title": "JavaScript",
-      "description": "The dynamic soul of the web. DOM manipulation, API calls, event handling—you name it."
-    },
-    "React": {
-      "title": "React",
-      "description": "Component-based frontend power. I build reusable, scalable interfaces with React and hooks."
-    }
+  "Contact Information": {
+    "title": "Contact Information",
+    "description": "Christopher Ramessar\nFull Stack Software Developer\n(347) 370-8890 | ramessar4@gmail.com\nLinkedIn: linkedin.com/in/christopher-ramessar/\nGitHub: https://github.com/Cramessar"
+  },
+  "Professional Summary": {
+    "title": "Professional Summary",
+    "description": "Results-driven Full Stack Developer and Technology Leader with over 8 years of experience in software engineering, distributed systems, and cloud-native architectures. Proven ability to design, develop, and deploy scalable web applications and APIs using modern technologies including Python, JavaScript, React, Flask, FastAPI, and Java. Skilled in CI/CD pipelines, Docker, RESTful services, and API integration. Strong foundation in DevOps, network operations, and system monitoring with tools like Grafana and Nagios. Experienced in leading cross-functional teams, mentoring developers, and managing cloud migrations. Committed to continuous learning and staying current with advancements in AI, ML, and LLMs."
+  },
+  "Skills": {
+    "title": "Skills",
+    "description": "Core: API Dev, Database Design, Docker, GitOps, System Monitoring, Agile\nLanguages: JavaScript, Python, Java, C#, PHP, SQL, Bash\nFrameworks: React, Flask, FastAPI, Django, Spring Boot, .NET Core\nDatabases: PostgreSQL, MySQL, SQLite, MongoDB\nCloud/Infra: AWS, Azure, GCP, Docker, Kubernetes\nDevOps: GitHub Actions, Jenkins, Terraform (basic)\nMonitoring: Grafana, Nagios, Prometheus, ELK\nTesting: Pytest, Jest, Selenium (basic), Postman\nSecurity: JWT, OAuth 2.0, RBAC\nCerts: Coding Temple \u2013 Full Stack Software Engineer"
+  },
+  "Experience": {
+    "title": "Experience",
+    "description": "Network Operations Manager \u2013 ACCESS SOFTEK (2016\u2013Present)\n- Led team of 7 engineers supporting 300+ clients\n- Migrated critical apps to cloud, reducing costs\n- Reduced downtime with proactive monitoring tools\n\nSoftware Engineer Trainee \u2013 Coding Temple (Nov 2024\u2013Feb 2025)\n- Built fullstack apps (React/Flask) and integrated APIs\n- Worked on backend auth, CI/CD, Dockerized environments"
+  },
+  "Education": {
+    "title": "Education",
+    "description": "Coding Temple \u2013 Certificate in Software Engineering"
   }
-  
+}
