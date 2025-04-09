@@ -9,41 +9,46 @@
 </head>
 <body>
   <h1 class="title">Chris's Sphere Grid</h1>
-  <svg viewBox="0 0 1000 800" class="sphere-grid">
-    <!-- Avatar center node -->
-    <circle cx="300" cy="400" r="50" class="node avatar-node" data-skill="Avatar" />
-    <image href="avatar.png" x="275" y="375" height="50" width="50" clip-path="circle(25px at center)" pointer-events="none" />
-    <text x="300" y="470" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Avatar</text>
 
-    <!-- Branching paths from avatar node -->
-    <line x1="300" y1="400" x2="500" y2="300" class="path" />
-    <line x1="300" y1="400" x2="500" y2="400" class="path" />
-    <line x1="300" y1="400" x2="500" y2="500" class="path" />
-    <line x1="300" y1="400" x2="700" y2="250" class="path" />
-    <line x1="300" y1="400" x2="700" y2="550" class="path" />
-    <line x1="300" y1="400" x2="850" y2="400" class="path" />
+  <!-- Responsive SVG Grid -->
+  <div class="svg-wrapper">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" class="sphere-grid">
+      <!-- Avatar Node -->
+      <circle cx="300" cy="400" r="50" class="node avatar-node" data-skill="Avatar" />
+      <image href="avatar.png" x="275" y="375" height="50" width="50" clip-path="circle(25px at center)" pointer-events="none" />
+      <text x="300" y="470" text-anchor="middle" font-size="14" fill="#fff" pointer-events="none">Avatar</text>
 
-    <!-- Skill nodes and labels -->
-    <circle cx="500" cy="300" r="40" class="node skill-html" data-skill="Contact Information" />
-    <text x="500" y="305" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Contact</text>
+      <!-- Connecting Paths -->
+      <line x1="300" y1="400" x2="500" y2="300" class="path" />
+      <line x1="300" y1="400" x2="500" y2="400" class="path" />
+      <line x1="300" y1="400" x2="500" y2="500" class="path" />
+      <line x1="300" y1="400" x2="700" y2="250" class="path" />
+      <line x1="300" y1="400" x2="700" y2="550" class="path" />
+      <line x1="300" y1="400" x2="850" y2="400" class="path" />
 
-    <circle cx="500" cy="400" r="40" class="node skill-css" data-skill="Professional Summary" />
-    <text x="500" y="405" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Summary</text>
+      <!-- Skill Nodes -->
+      <circle cx="500" cy="300" r="40" class="node skill-html" data-skill="Contact Information" />
+      <text x="500" y="305" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Contact</text>
 
-    <circle cx="500" cy="500" r="40" class="node skill-js" data-skill="Skills" />
-    <text x="500" y="505" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Skills</text>
+      <circle cx="500" cy="400" r="40" class="node skill-css" data-skill="Professional Summary" />
+      <text x="500" y="405" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Summary</text>
 
-    <circle cx="700" cy="250" r="40" class="node skill-react" data-skill="Experience" />
-    <text x="700" y="255" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Experience</text>
+      <circle cx="500" cy="500" r="40" class="node skill-js" data-skill="Skills" />
+      <text x="500" y="505" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Skills</text>
 
-    <circle cx="700" cy="550" r="40" class="node skill-css" data-skill="Education" />
-    <text x="700" y="555" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Education</text>
+      <circle cx="700" cy="250" r="40" class="node skill-react" data-skill="Experience" />
+      <text x="700" y="255" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Experience</text>
 
-    <circle cx="850" cy="400" r="40" class="node skill-js" data-skill="Projects" />
-    <text x="850" y="405" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Projects</text>
-  </svg>
+      <circle cx="700" cy="550" r="40" class="node skill-css" data-skill="Education" />
+      <text x="700" y="555" text-anchor="middle" font-size="12" fill="#fff" pointer-events="none">Education</text>
+
+      <circle cx="850" cy="400" r="40" class="node skill-js" data-skill="Projects" />
+      <text x="850" y="405" text-anchor="middle" font-size="12" fill="#000" pointer-events="none">Projects</text>
+    </svg>
+  </div>
 
   <div id="tooltip" class="tooltip">Tooltip</div>
+
   <div id="modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -52,18 +57,17 @@
     </div>
   </div>
 
+  <!-- EXP Progress Bar -->
+  <div class="exp-container">
+    <div class="exp-bar" id="exp-bar"></div>
+    <span class="exp-label" id="exp-label">0 / 7 Nodes Unlocked</span>
+  </div>
+
+  <!-- Secret Reward Button -->
+  <div class="email-reward" id="email-reward" style="display:none;">
+    <button id="email-button">🎁 You've unlocked my contact info!</button>
+  </div>
+
   <script src="script.js"></script>
-
-  <!-- Add this just above </body> -->
-<div class="exp-container">
-  <div class="exp-bar" id="exp-bar"></div>
-  <span class="exp-label" id="exp-label">0 / 6 Nodes Unlocked</span>
-</div>
-
-<!-- Add this below the EXP bar -->
-<div class="email-reward" id="email-reward" style="display:none;">
-  <button id="email-button">🎁 You've unlocked my contact info!</button>
-</div>
-
 </body>
 </html>
