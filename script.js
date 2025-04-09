@@ -13,60 +13,67 @@ fetch("data.json")
 
 function setupNodes() {
   const TOTAL_REQUIRED = 7;
-  const emailReward = document.getElementById("email-reward");
-  const emailButton = document.getElementById("email-button");
   const tooltip = document.getElementById("tooltip");
   const modal = document.getElementById("modal");
   const modalTitle = document.getElementById("modal-title");
   const modalDescription = document.getElementById("modal-description");
   const closeModal = document.querySelector(".close");
-  const nodes = document.querySelectorAll(".node");
   const expBar = document.getElementById("exp-bar");
   const expLabel = document.getElementById("exp-label");
+  const emailReward = document.getElementById("email-reward");
+  const emailButton = document.getElementById("email-button");
 
-  nodes.forEach(node => {
-    const skill = node.dataset.skill;
+  const nodeGroups = document.querySelectorAll(".node-group");
 
-    node.addEventListener("mouseenter", () => {
-      if (lockedSkill) return;
-      tooltip.innerText = skillData[skill]?.title || skill;
-      tooltip.style.display = "block";
+  nodeGroups.forEach(group => {
+    const skill = group.dataset.skill;
+
+    group.addEventListener("mouseenter", () => {
+      if (!lockedSkill) {
+        tooltip.innerText = skillData[skill]?.title || skill;
+        tooltip.style.display = "block";
+      }
     });
 
-    node.addEventListener("mousemove", e => {
+    group.addEventListener("mousemove", e => {
       if (!lockedSkill) {
         tooltip.style.left = e.pageX + 15 + "px";
         tooltip.style.top = e.pageY + 15 + "px";
       }
     });
 
-    node.addEventListener("mouseleave", () => {
-      if (!lockedSkill) tooltip.style.display = "none";
+    group.addEventListener("mouseleave", () => {
+      if (!lockedSkill) {
+        tooltip.style.display = "none";
+      }
     });
 
-    node.addEventListener("click", () => {
+    group.addEventListener("click", () => {
       lockedSkill = skill;
       tooltip.style.display = "none";
+
       modalTitle.innerText = skillData[skill]?.title || skill;
       modalDescription.innerText = skillData[skill]?.description || "More details coming soon.";
       modal.style.display = "block";
 
-      // Pulse animation
-      node.classList.add("pulsing");
-      setTimeout(() => node.classList.remove("pulsing"), 600);
+      // Pulse circle in group
+      const circle = group.querySelector("circle");
+      circle.classList.add("pulsing");
+      setTimeout(() => circle.classList.remove("pulsing"), 600);
 
-      // Flash closest path (simple logic)
+      // Highlight matching path
+      const cx = circle.getAttribute("cx");
+      const cy = circle.getAttribute("cy");
       const paths = document.querySelectorAll("line.path");
+
       paths.forEach(path => {
-        const x2 = path.getAttribute("x2");
-        const y2 = path.getAttribute("y2");
-        if (x2 == node.getAttribute("cx") && y2 == node.getAttribute("cy")) {
+        if (path.getAttribute("x2") === cx && path.getAttribute("y2") === cy) {
           path.classList.add("glow");
           setTimeout(() => path.classList.remove("glow"), 600);
         }
       });
 
-      // Update skill progress
+      // EXP logic
       if (!unlockedSkills.has(skill)) {
         unlockedSkills.add(skill);
         const percent = (unlockedSkills.size / TOTAL_REQUIRED) * 100;
@@ -92,7 +99,6 @@ function setupNodes() {
     }
   });
 
-  // ✅ Email button click - OUTSIDE other listeners
   emailButton.addEventListener("click", () => {
     alert("📫 You can reach me at: Ramessar40@gmail.com");
   });
