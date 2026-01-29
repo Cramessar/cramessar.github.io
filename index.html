@@ -5,213 +5,744 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Christopher Ramessar | Software Engineer</title>
   <meta name="description" content="Senior Software Engineer building full-stack systems, AI tools, and real-world products." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#0b0d10" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #0b0d10;
-      --panel: #11141a;
-      --text: #e6e8eb;
-      --muted: #9aa4b2;
+      --bg2: #070a0e;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel2: rgba(255, 255, 255, 0.025);
+      --text: #e8eaed;
+      --muted: #a2acb9;
+      --border: rgba(255, 255, 255, 0.10);
+      --border2: rgba(255, 255, 255, 0.06);
+      --shadow: 0 20px 60px rgba(0,0,0,0.50);
       --accent: #4fd1c5;
-      --accent-2: #63b3ed;
-      --border: #1f2430;
+      --accent2: #63b3ed;
+      --accent3: #b794f4;
+      --good: #68d391;
+      --warn: #fbd38d;
+      --bad: #fc8181;
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, #132033, transparent), var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text);
-      line-height: 1.6;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(99,179,237,0.18), transparent 55%),
+        radial-gradient(900px 500px at 95% 10%, rgba(183,148,244,0.16), transparent 55%),
+        radial-gradient(900px 500px at 50% 115%, rgba(79,209,197,0.12), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x: hidden;
     }
 
-    a { color: var(--accent-2); text-decoration: none; }
+    a { color: var(--accent2); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 4rem 1.5rem;
+    /* --- Subtle animated noise overlay --- */
+    .noise {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="220" height="220" filter="url(%23n)" opacity="0.35"/></svg>');
+      animation: noiseShift 6s steps(2) infinite;
     }
 
-    header {
+    @keyframes noiseShift {
+      0% { transform: translate3d(0,0,0); }
+      25% { transform: translate3d(-2%, 1%, 0); }
+      50% { transform: translate3d(1%, -2%, 0); }
+      75% { transform: translate3d(2%, 2%, 0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    /* --- Floating orb / depth accent --- */
+    .orb {
+      position: absolute;
+      right: -140px;
+      top: -120px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(79,209,197,0.55), transparent 55%),
+        radial-gradient(circle at 60% 55%, rgba(99,179,237,0.40), transparent 55%),
+        radial-gradient(circle at 35% 70%, rgba(183,148,244,0.35), transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), rgba(0,0,0,0) 60%);
+      filter: blur(2px) saturate(1.05);
+      opacity: 0.95;
+      transform: translate3d(0,0,0);
+      animation: floaty 10s ease-in-out infinite;
+    }
+
+    .orb::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: radial-gradient(circle at 55% 35%, rgba(255,255,255,0.08), transparent 50%);
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translate3d(0,0,0) rotate(0deg); }
+      50% { transform: translate3d(-24px, 18px, 0) rotate(6deg); }
+    }
+
+    /* --- Layout --- */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3.5rem 1.25rem 4.5rem;
+      position: relative;
+    }
+
+    /* Top nav */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 1rem 0.25rem;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(11,13,16,0.80), rgba(11,13,16,0.30));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(79,209,197,0.10);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .navlinks a {
+      color: var(--muted);
+      padding: 0.25rem 0.4rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+
+    .navlinks a:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.10);
+      text-decoration: none;
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Hero */
+    .hero {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 3rem;
+      gap: 2.25rem;
       align-items: center;
-      margin-bottom: 6rem;
+      margin-top: 2.75rem;
+      margin-bottom: 4.5rem;
+      position: relative;
     }
 
     .badge {
-      display: inline-block;
-      padding: 0.35rem 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
-      background: rgba(79,209,197,0.1);
-      color: var(--accent);
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      font-size: 0.82rem;
+      width: fit-content;
     }
+
+    .badge strong { color: var(--text); font-weight: 600; }
 
     h1 {
-      font-size: 3rem;
-      line-height: 1.1;
-      margin: 0.5rem 0 1rem;
+      font-size: 3.2rem;
+      line-height: 1.02;
+      margin: 0.85rem 0 1.25rem;
+      letter-spacing: -0.04em;
     }
 
-    h2 {
-      font-size: 2rem;
-      margin-top: 0;
+    .gradientText {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    p.lead {
-      font-size: 1.1rem;
+    .lead {
+      font-size: 1.08rem;
       color: var(--muted);
+      margin: 0 0 1rem;
     }
 
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
+    .ctaRow {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
     }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.78rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      text-decoration: none;
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .btn.primary {
+      border-color: rgba(79,209,197,0.35);
+      background: linear-gradient(180deg, rgba(79,209,197,0.16), rgba(255,255,255,0.02));
+    }
+
+    .btn.primary:hover {
+      border-color: rgba(79,209,197,0.55);
+    }
+
+    /* Panels / cards */
+    .panel {
+      background: linear-gradient(180deg, var(--panel), rgba(255,255,255,0.015));
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--radius);
+      background: radial-gradient(600px 120px at 20% 0%, rgba(79,209,197,0.18), transparent 60%),
+                  radial-gradient(600px 120px at 80% 0%, rgba(99,179,237,0.14), transparent 60%);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .panel > * { position: relative; }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.2rem;
     }
 
-    .project h3 { margin-top: 0; }
+    .kicker {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0.15rem 0 0.8rem;
+    }
+
+    .section {
+      margin-bottom: 4.25rem;
+    }
+
+    .section h2 {
+      font-size: 1.9rem;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.3rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+      margin: 1.25rem 0 0;
+    }
+
+    /* Project cards */
+    .projectCard {
+      transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .projectCard:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .projectTop {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .projectTop h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.01em;
+    }
+
+    .tagRow {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+    }
+
+    .thumb {
+      width: 100%;
+      height: 160px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(120px 90px at 25% 35%, rgba(79,209,197,0.30), transparent 60%),
+        radial-gradient(120px 90px at 65% 65%, rgba(99,179,237,0.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin: 0.85rem 0 0.65rem;
+    }
+
+    .thumb svg { opacity: 0.9; }
+
+    .inlineLinks {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .inlineLinks a {
+      color: var(--text);
+      opacity: 0.92;
+    }
+
+    .inlineLinks a:hover { opacity: 1; }
+
+    /* Nerdy terminal panel */
+    .terminal {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.88rem;
+      color: #d8dee9;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .terminalHeader {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 0.85rem;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dotRed, .dotYel, .dotGrn {
+      width: 10px; height: 10px; border-radius: 50%;
+      display: inline-block;
+    }
+    .dotRed { background: var(--bad); }
+    .dotYel { background: var(--warn); }
+    .dotGrn { background: var(--good); }
+
+    .terminalBody {
+      padding: 0.9rem 1rem 1.05rem;
+      color: rgba(232,234,237,0.92);
+    }
+
+    .terminalBody .dim { color: rgba(232,234,237,0.65); }
+    .terminalBody .ok { color: var(--good); }
+    .terminalBody .acc { color: var(--accent); }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 650ms ease, transform 650ms ease;
+    }
+    .reveal.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     footer {
-      border-top: 1px solid var(--border);
-      margin-top: 6rem;
-      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 4rem;
+      padding-top: 1.75rem;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1rem;
     }
 
-    @media (max-width: 900px) {
-      header { grid-template-columns: 1fr; }
-      h1 { font-size: 2.4rem; }
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      h1 { font-size: 2.55rem; }
+      .orb { right: -240px; top: -220px; width: 560px; height: 560px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="noise" aria-hidden="true"></div>
 
-    <header>
-      <div>
-        <span class="badge">Software Engineer</span>
-        <h1>Christopher Ramessar</h1>
+  <div class="container">
+    <div class="orb" aria-hidden="true"></div>
+
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span> C. Ramessar</div>
+      <nav class="navlinks" aria-label="Site navigation">
+        <a href="#projects">Projects</a>
+        <a href="#principles">How I Work</a>
+        <a href="#stack">Stack</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div class="reveal">
+        <span class="badge">Currently building: <strong>real tools</strong> + <strong>local AI systems</strong></span>
+        <h1>
+          Christopher <span class="gradientText">Ramessar</span>
+        </h1>
         <p class="lead">
-          I build real-world software systems across <strong>full-stack web</strong>,
-          <strong>backend APIs</strong>, and <strong>AI tooling</strong> — with a focus on
-          clarity, performance, and long-term maintainability.
+          Senior Software Engineer building <strong>full-stack products</strong>, <strong>backend platforms</strong>,
+          and <strong>AI tooling</strong> — with a bias toward clarity, performance, and maintainable architecture.
         </p>
         <p class="lead">
-          Background in senior IT & platform engineering. I like boring systems that
-          work and ambitious ideas that ship.
+          I like boring systems that work… and nerdy systems with enough depth to keep them working.
         </p>
-        <p>
-          <a href="https://github.com/Cramessar">GitHub</a> ·
-          <a href="https://www.linkedin.com/in/christopher-ramessar/">LinkedIn</a> ·
-          <a href="mailto:Ramessar40@gmail.com">Email</a>
-        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="https://car-pay-clear.vercel.app" target="_blank" rel="noreferrer">
+            View Car Pay Clear
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn" href="https://github.com/Cramessar" target="_blank" rel="noreferrer">
+            GitHub
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/christopher-ramessar/" target="_blank" rel="noreferrer">
+            LinkedIn
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
 
-      <div class="panel">
-        <h3>Current Focus</h3>
-        <ul>
-          <li>Building transparent, user-first financial tools</li>
-          <li>Local-first AI systems & LLM integration</li>
-          <li>Scalable backend platforms & observability</li>
-        </ul>
+      <div class="reveal">
+        <div class="terminal" role="group" aria-label="Terminal style status panel">
+          <div class="terminalHeader">
+            <span class="dotRed"></span><span class="dotYel"></span><span class="dotGrn"></span>
+            <span class="dim" style="margin-left:0.35rem;">system.status</span>
+          </div>
+          <div class="terminalBody">
+            <div><span class="dim">$</span> <span class="acc">build</span> portfolio --mode=clean --signal=senior</div>
+            <div class="dim">→ compiling: product sense · system design · AI integration</div>
+            <div class="dim">→ runtime: docker · apis · postgres · observability</div>
+            <div style="margin-top:0.55rem;"><span class="ok">✓</span> shipped: <span class="acc">Car Pay Clear</span></div>
+            <div><span class="ok">✓</span> shipping: <span class="acc">Local GPT</span> (local-first LLM stack)</div>
+            <div><span class="ok">✓</span> focus: <span class="acc">reliability</span> · <span class="acc">clarity</span> · <span class="acc">depth</span></div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <section style="margin-bottom:5rem;">
+    <section id="projects" class="section reveal">
       <h2>Featured Projects</h2>
+      <p class="kicker">A couple of things I’ve built that show how I think and what I ship.</p>
       <div class="grid">
-        <div class="panel project">
-          <h3>🚗 Car Pay Clear</h3>
-          <p>
-            A consumer-focused auto loan and affordability calculator designed
-            to remove confusion and dark patterns from car buying.
+        <article class="panel projectCard">
+          <div class="projectTop">
+            <h3>🚗 Car Pay Clear</h3>
+            <span class="tag">Live</span>
+          </div>
+          <p class="kicker">
+            Transparent auto-loan and affordability calculator built for clarity and trust — no dark patterns.
           </p>
-          <p><strong>Stack:</strong> React, Financial Modeling, UX-first Design</p>
-          <p>
-            <a href="https://car-pay-clear.vercel.app">Live Site →</a>
-          </p>
-        </div>
 
-        <div class="panel project">
-          <h3>🧠 Local GPT</h3>
-          <p>
-            A local-first AI platform for running and experimenting with LLMs
-            without relying on external APIs.
-          </p>
-          <p><strong>Stack:</strong> Ollama, Python, Modular Architecture</p>
-          <p>
-            <a href="https://github.com/Cramessar">GitHub Repo →</a>
-          </p>
-        </div>
+          <div class="thumb" aria-hidden="true">
+            <!-- Simple “finance graph” SVG placeholder (swap with real screenshot later) -->
+            <svg width="240" height="120" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 90 C40 70, 65 85, 90 62 C115 40, 140 58, 165 38 C190 18, 215 32, 225 22" stroke="rgba(79,209,197,0.85)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M15 100 L15 18" stroke="rgba(255,255,255,0.18)"/>
+              <path d="M15 100 L230 100" stroke="rgba(255,255,255,0.18)"/>
+              <circle cx="90" cy="62" r="4" fill="rgba(99,179,237,0.85)"/>
+              <circle cx="165" cy="38" r="4" fill="rgba(99,179,237,0.85)"/>
+              <circle cx="225" cy="22" r="4" fill="rgba(183,148,244,0.85)"/>
+            </svg>
+          </div>
 
-        <div class="panel project">
-          <h3>📊 Platform Dashboards</h3>
-          <p>
-            Admin and observability dashboards for monitoring systems,
-            jobs, and data pipelines.
+          <div class="tagRow">
+            <span class="tag">React</span>
+            <span class="tag">UX-first</span>
+            <span class="tag">Financial modeling</span>
+            <span class="tag">Vercel</span>
+          </div>
+
+          <div class="inlineLinks">
+            <a href="https://car-pay-clear.vercel.app" target="_blank" rel="noreferrer">Live site →</a>
+          </div>
+        </article>
+
+        <article class="panel projectCard">
+          <div class="projectTop">
+            <h3>🧠 Local GPT</h3>
+            <span class="tag">Local-first</span>
+          </div>
+          <p class="kicker">
+            A local LLM playground focused on privacy, control, and performance — designed to be modular and extensible.
           </p>
-          <p><strong>Stack:</strong> React, APIs, PostgreSQL, Metrics</p>
+
+          <div class="thumb" aria-hidden="true">
+            <!-- Minimal “node graph” SVG placeholder -->
+            <svg width="240" height="120" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="55" cy="70" r="10" fill="rgba(79,209,197,0.8)"/>
+              <circle cx="120" cy="45" r="10" fill="rgba(99,179,237,0.8)"/>
+              <circle cx="185" cy="70" r="10" fill="rgba(183,148,244,0.8)"/>
+              <path d="M65 66 L110 49" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <path d="M130 49 L175 66" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+              <path d="M55 70 C80 88, 160 88, 185 70" stroke="rgba(255,255,255,0.16)" stroke-width="2" stroke-dasharray="4 4"/>
+              <text x="43" y="98" fill="rgba(255,255,255,0.55)" font-size="10">UI</text>
+              <text x="102" y="28" fill="rgba(255,255,255,0.55)" font-size="10">Router</text>
+              <text x="170" y="98" fill="rgba(255,255,255,0.55)" font-size="10">Model</text>
+            </svg>
+          </div>
+
+          <div class="tagRow">
+            <span class="tag">Ollama</span>
+            <span class="tag">Python</span>
+            <span class="tag">Plugins</span>
+            <span class="tag">Performance</span>
+          </div>
+
+          <div class="inlineLinks">
+            <a href="https://github.com/Cramessar" target="_blank" rel="noreferrer">Repo →</a>
+          </div>
+        </article>
+
+        <article class="panel projectCard">
+          <div class="projectTop">
+            <h3>📊 Platform Dashboards</h3>
+            <span class="tag">Ops</span>
+          </div>
+          <p class="kicker">
+            Admin and observability dashboards for monitoring jobs, services, and metrics — built for fast diagnosis.
+          </p>
+
+          <div class="thumb" aria-hidden="true">
+            <!-- Minimal “dashboard bars” SVG placeholder -->
+            <svg width="240" height="120" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="60" width="22" height="40" rx="6" fill="rgba(99,179,237,0.55)"/>
+              <rect x="62" y="40" width="22" height="60" rx="6" fill="rgba(79,209,197,0.55)"/>
+              <rect x="99" y="25" width="22" height="75" rx="6" fill="rgba(183,148,244,0.55)"/>
+              <rect x="136" y="50" width="22" height="50" rx="6" fill="rgba(99,179,237,0.55)"/>
+              <rect x="173" y="32" width="22" height="68" rx="6" fill="rgba(79,209,197,0.55)"/>
+              <path d="M25 100 L210 100" stroke="rgba(255,255,255,0.18)"/>
+            </svg>
+          </div>
+
+          <div class="tagRow">
+            <span class="tag">React</span>
+            <span class="tag">APIs</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Metrics</span>
+          </div>
+        </article>
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <section id="principles" class="section reveal">
+      <h2>How I Work</h2>
+      <p class="kicker">My default mode: ship something real, measure it, and improve it.</p>
+      <div class="grid">
+        <div class="panel">
+          <h3>Systems thinking</h3>
+          <p class="kicker">Design with deployment, observability, and failure modes in mind.</p>
+          <div class="tagRow">
+            <span class="tag">Monitoring</span>
+            <span class="tag">Reliability</span>
+            <span class="tag">Performance</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Practical AI</h3>
+          <p class="kicker">Use AI where it adds leverage — not where it adds hype.</p>
+          <div class="tagRow">
+            <span class="tag">LLMs</span>
+            <span class="tag">RAG</span>
+            <span class="tag">Tooling</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>End-to-end ownership</h3>
+          <p class="kicker">Architecture → implementation → docs → iteration.</p>
+          <div class="tagRow">
+            <span class="tag">CI/CD</span>
+            <span class="tag">DX</span>
+            <span class="tag">Product</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <section id="stack" class="section reveal">
+      <h2>Stack Snapshot</h2>
+      <p class="kicker">A quick overview of what I reach for most often.</p>
+      <div class="grid">
+        <div class="panel">
+          <h3>Backend</h3>
+          <p class="kicker">Python · FastAPI/Flask · Node/Express · REST · WebSockets</p>
+          <div class="tagRow">
+            <span class="tag">OpenAPI</span>
+            <span class="tag">Caching</span>
+            <span class="tag">Rate limiting</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Data</h3>
+          <p class="kicker">PostgreSQL · Redis · SQLite · MongoDB · Protobuf/JSON</p>
+          <div class="tagRow">
+            <span class="tag">Data modeling</span>
+            <span class="tag">Performance</span>
+            <span class="tag">Pipelines</span>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Infra</h3>
+          <p class="kicker">Docker · Compose · AWS · Terraform · Nginx · CI/CD</p>
+          <div class="tagRow">
+            <span class="tag">GitHub Actions</span>
+            <span class="tag">Observability</span>
+            <span class="tag">Automation</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section style="margin-bottom:5rem;">
-      <h2>How I Work</h2>
+    <section id="contact" class="section reveal">
+      <h2>Contact</h2>
+      <p class="kicker">Want to chat about building tools, platforms, or AI systems? I’m easy to reach.</p>
       <div class="grid">
         <div class="panel">
-          <h3>Systems Thinking</h3>
-          <p>
-            I design software with deployment, monitoring, and failure
-            scenarios in mind from day one.
+          <h3>Links</h3>
+          <p class="kicker">
+            <a href="https://github.com/Cramessar" target="_blank" rel="noreferrer">GitHub</a> ·
+            <a href="https://www.linkedin.com/in/christopher-ramessar/" target="_blank" rel="noreferrer">LinkedIn</a> ·
+            <a href="mailto:Ramessar40@gmail.com">Email</a>
           </p>
+          <div class="tagRow">
+            <span class="tag">Sayreville, NJ</span>
+            <span class="tag">Remote-friendly</span>
+          </div>
         </div>
         <div class="panel">
-          <h3>Practical AI</h3>
-          <p>
-            I integrate AI where it adds leverage — not where it adds hype.
-          </p>
-        </div>
-        <div class="panel">
-          <h3>End-to-End Ownership</h3>
-          <p>
-            From architecture and code to docs and iteration — I ship and
-            maintain what I build.
+          <h3>Quick note</h3>
+          <p class="kicker">
+            Most day-to-day work lives in private repos or client environments. Public projects here are the clean, reusable slices.
           </p>
         </div>
       </div>
     </section>
 
     <footer>
-      <div>
-        © <span id="year"></span> Christopher Ramessar
-      </div>
-      <div>
-        Built with plain HTML & CSS · Hosted on GitHub Pages
-      </div>
+      <div>© <span id="year"></span> Christopher Ramessar</div>
+      <div>Built with HTML/CSS/JS · GitHub Pages</div>
     </footer>
-
   </div>
 
   <script>
+    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal-on-scroll
+    const els = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.12 });
+
+    els.forEach(el => io.observe(el));
+
+    // Tiny parallax feel on the orb (mouse move)
+    const orb = document.querySelector('.orb');
+    let raf = null;
+    window.addEventListener('mousemove', (ev) => {
+      if (!orb) return;
+      const x = (ev.clientX / window.innerWidth - 0.5) * 18;
+      const y = (ev.clientY / window.innerHeight - 0.5) * 18;
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        orb.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      });
+    }, { passive: true });
   </script>
 </body>
 </html>
