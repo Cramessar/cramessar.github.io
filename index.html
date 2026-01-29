@@ -1,87 +1,217 @@
-<!-- File: index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chris's Sphere Grid</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Christopher Ramessar | Software Engineer</title>
+  <meta name="description" content="Senior Software Engineer building full-stack systems, AI tools, and real-world products." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #11141a;
+      --text: #e6e8eb;
+      --muted: #9aa4b2;
+      --accent: #4fd1c5;
+      --accent-2: #63b3ed;
+      --border: #1f2430;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #132033, transparent), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 6rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(79,209,197,0.1);
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin: 0.5rem 0 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+
+    p.lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project h3 { margin-top: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      margin-top: 6rem;
+      padding-top: 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      header { grid-template-columns: 1fr; }
+      h1 { font-size: 2.4rem; }
+    }
+  </style>
 </head>
 <body>
-  <h1 class="title">Chris's Sphere Grid</h1>
+  <div class="container">
 
-  <!-- Responsive SVG Grid -->
-  <div class="svg-wrapper">
-    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" class="sphere-grid">
-      <!-- Avatar Node -->
-      <g class="node-group" data-skill="Avatar">
-        <circle cx="300" cy="400" r="50" class="node avatar-node" />
-        <image href="avatar.png" x="275" y="375" height="50" width="50" pointer-events="none" />
-        <text x="300" y="470" text-anchor="middle" font-size="14" fill="#fff">Avatar</text>
-      </g>
+    <header>
+      <div>
+        <span class="badge">Software Engineer</span>
+        <h1>Christopher Ramessar</h1>
+        <p class="lead">
+          I build real-world software systems across <strong>full-stack web</strong>,
+          <strong>backend APIs</strong>, and <strong>AI tooling</strong> — with a focus on
+          clarity, performance, and long-term maintainability.
+        </p>
+        <p class="lead">
+          Background in senior IT & platform engineering. I like boring systems that
+          work and ambitious ideas that ship.
+        </p>
+        <p>
+          <a href="https://github.com/Cramessar">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/christopher-ramessar/">LinkedIn</a> ·
+          <a href="mailto:Ramessar40@gmail.com">Email</a>
+        </p>
+      </div>
 
-      <!-- Connecting Paths -->
-      <line x1="300" y1="400" x2="500" y2="300" class="path" />
-      <line x1="300" y1="400" x2="500" y2="400" class="path" />
-      <line x1="300" y1="400" x2="500" y2="500" class="path" />
-      <line x1="300" y1="400" x2="700" y2="250" class="path" />
-      <line x1="300" y1="400" x2="700" y2="550" class="path" />
-      <line x1="300" y1="400" x2="850" y2="400" class="path" />
+      <div class="panel">
+        <h3>Current Focus</h3>
+        <ul>
+          <li>Building transparent, user-first financial tools</li>
+          <li>Local-first AI systems & LLM integration</li>
+          <li>Scalable backend platforms & observability</li>
+        </ul>
+      </div>
+    </header>
 
-      <!-- Skill Nodes -->
-      <g class="node-group" data-skill="Contact Information">
-        <circle cx="500" cy="300" r="40" class="node skill-html" />
-        <text x="500" y="305" text-anchor="middle" font-size="12" fill="#fff">Contact</text>
-      </g>
+    <section style="margin-bottom:5rem;">
+      <h2>Featured Projects</h2>
+      <div class="grid">
+        <div class="panel project">
+          <h3>🚗 Car Pay Clear</h3>
+          <p>
+            A consumer-focused auto loan and affordability calculator designed
+            to remove confusion and dark patterns from car buying.
+          </p>
+          <p><strong>Stack:</strong> React, Financial Modeling, UX-first Design</p>
+          <p>
+            <a href="https://car-pay-clear.vercel.app">Live Site →</a>
+          </p>
+        </div>
 
-      <g class="node-group" data-skill="Professional Summary">
-        <circle cx="500" cy="400" r="40" class="node skill-css" />
-        <text x="500" y="405" text-anchor="middle" font-size="12" fill="#fff">Summary</text>
-      </g>
+        <div class="panel project">
+          <h3>🧠 Local GPT</h3>
+          <p>
+            A local-first AI platform for running and experimenting with LLMs
+            without relying on external APIs.
+          </p>
+          <p><strong>Stack:</strong> Ollama, Python, Modular Architecture</p>
+          <p>
+            <a href="https://github.com/Cramessar">GitHub Repo →</a>
+          </p>
+        </div>
 
-      <g class="node-group" data-skill="Skills">
-        <circle cx="500" cy="500" r="40" class="node skill-js" />
-        <text x="500" y="505" text-anchor="middle" font-size="12" fill="#000">Skills</text>
-      </g>
+        <div class="panel project">
+          <h3>📊 Platform Dashboards</h3>
+          <p>
+            Admin and observability dashboards for monitoring systems,
+            jobs, and data pipelines.
+          </p>
+          <p><strong>Stack:</strong> React, APIs, PostgreSQL, Metrics</p>
+        </div>
+      </div>
+    </section>
 
-      <g class="node-group" data-skill="Experience">
-        <circle cx="700" cy="250" r="40" class="node skill-react" />
-        <text x="700" y="255" text-anchor="middle" font-size="12" fill="#000">Experience</text>
-      </g>
+    <section style="margin-bottom:5rem;">
+      <h2>How I Work</h2>
+      <div class="grid">
+        <div class="panel">
+          <h3>Systems Thinking</h3>
+          <p>
+            I design software with deployment, monitoring, and failure
+            scenarios in mind from day one.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Practical AI</h3>
+          <p>
+            I integrate AI where it adds leverage — not where it adds hype.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>End-to-End Ownership</h3>
+          <p>
+            From architecture and code to docs and iteration — I ship and
+            maintain what I build.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      <g class="node-group" data-skill="Education">
-        <circle cx="700" cy="550" r="40" class="node skill-css" />
-        <text x="700" y="555" text-anchor="middle" font-size="12" fill="#fff">Education</text>
-      </g>
+    <footer>
+      <div>
+        © <span id="year"></span> Christopher Ramessar
+      </div>
+      <div>
+        Built with plain HTML & CSS · Hosted on GitHub Pages
+      </div>
+    </footer>
 
-      <g class="node-group" data-skill="Projects">
-        <circle cx="850" cy="400" r="40" class="node skill-js" />
-        <text x="850" y="405" text-anchor="middle" font-size="12" fill="#000">Projects</text>
-      </g>
-    </svg>
   </div>
 
-  <div id="tooltip" class="tooltip">Tooltip</div>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2 id="modal-title"></h2>
-      <p id="modal-description"></p>
-    </div>
-  </div>
-
-  <!-- EXP Progress Bar -->
-  <div class="exp-container">
-    <div class="exp-bar" id="exp-bar"></div>
-    <span class="exp-label" id="exp-label">0 / 7 Nodes Unlocked</span>
-  </div>
-
-  <!-- Secret Reward Button -->
-  <div class="email-reward" id="email-reward" style="display:none;">
-    <button id="email-button">🎁 You've unlocked my contact info!</button>
-  </div>
-
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
